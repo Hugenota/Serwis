@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Serwis;
 
 namespace Serwis.Migrations
 {
     [DbContext(typeof(SerwisContext))]
-    partial class SerwisContextModelSnapshot : ModelSnapshot
+    [Migration("20200608180121_Add initial entity models - repair2")]
+    partial class Addinitialentitymodelsrepair2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,7 +80,7 @@ namespace Serwis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CompanyID1");
+                    b.Property<int>("CompanyID1");
 
                     b.Property<string>("CustomerAddress");
 
@@ -142,7 +144,7 @@ namespace Serwis.Migrations
 
                     b.Property<int?>("CompanyID1");
 
-                    b.Property<int?>("CustomerID1");
+                    b.Property<int?>("CustomerID");
 
                     b.Property<string>("ProductCategory");
 
@@ -160,7 +162,7 @@ namespace Serwis.Migrations
 
                     b.HasIndex("CompanyID1");
 
-                    b.HasIndex("CustomerID1");
+                    b.HasIndex("CustomerID");
 
                     b.ToTable("Products");
                 });
@@ -180,7 +182,8 @@ namespace Serwis.Migrations
                 {
                     b.HasOne("Serwis.Models.Company", "CompanyID")
                         .WithMany("Customers")
-                        .HasForeignKey("CompanyID1");
+                        .HasForeignKey("CompanyID1")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Serwis.Models.Products", b =>
@@ -189,9 +192,9 @@ namespace Serwis.Migrations
                         .WithMany("Products")
                         .HasForeignKey("CompanyID1");
 
-                    b.HasOne("Serwis.Models.Customer", "CustomerID")
+                    b.HasOne("Serwis.Models.Customer")
                         .WithMany("Products")
-                        .HasForeignKey("CustomerID1");
+                        .HasForeignKey("CustomerID");
                 });
 #pragma warning restore 612, 618
         }

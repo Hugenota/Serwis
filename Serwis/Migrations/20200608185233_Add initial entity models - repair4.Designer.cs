@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Serwis;
 
 namespace Serwis.Migrations
 {
     [DbContext(typeof(SerwisContext))]
-    partial class SerwisContextModelSnapshot : ModelSnapshot
+    [Migration("20200608185233_Add initial entity models - repair4")]
+    partial class Addinitialentitymodelsrepair4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

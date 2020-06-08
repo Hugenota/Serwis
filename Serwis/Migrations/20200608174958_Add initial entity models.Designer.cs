@@ -3,21 +3,25 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Serwis;
+
 
 namespace Serwis.Migrations
 {
     [DbContext(typeof(SerwisContext))]
-    partial class SerwisContextModelSnapshot : ModelSnapshot
+    [Migration("20200608174958_Add initial entity models")]
+    partial class Addinitialentitymodels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
 
             modelBuilder.Entity("Serwis.Models.Company", b =>
                 {
@@ -61,7 +65,7 @@ namespace Serwis.Migrations
 
                     b.Property<string>("FixDescription");
 
-                    b.Property<int?>("ProductID1");
+                    b.Property<int>("ProductID1");
 
                     b.HasKey("ComplaintID");
 
@@ -78,7 +82,7 @@ namespace Serwis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CompanyID1");
+                    b.Property<int>("CompanyID1");
 
                     b.Property<string>("CustomerAddress");
 
@@ -140,9 +144,9 @@ namespace Serwis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CompanyID1");
+                    b.Property<int>("CompanyID1");
 
-                    b.Property<int?>("CustomerID1");
+                    b.Property<int>("CustomerID1");
 
                     b.Property<string>("ProductCategory");
 
@@ -173,25 +177,29 @@ namespace Serwis.Migrations
 
                     b.HasOne("Serwis.Models.Products", "ProductID")
                         .WithMany("Complaints")
-                        .HasForeignKey("ProductID1");
+                        .HasForeignKey("ProductID1")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Serwis.Models.Customer", b =>
                 {
                     b.HasOne("Serwis.Models.Company", "CompanyID")
                         .WithMany("Customers")
-                        .HasForeignKey("CompanyID1");
+                        .HasForeignKey("CompanyID1")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Serwis.Models.Products", b =>
                 {
                     b.HasOne("Serwis.Models.Company", "CompanyID")
                         .WithMany("Products")
-                        .HasForeignKey("CompanyID1");
+                        .HasForeignKey("CompanyID1")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Serwis.Models.Customer", "CustomerID")
                         .WithMany("Products")
-                        .HasForeignKey("CustomerID1");
+                        .HasForeignKey("CustomerID1")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

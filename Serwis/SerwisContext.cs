@@ -10,6 +10,11 @@ namespace Serwis
         {
         }
 
-        public DbSet<Company> Companys { set; get; } 
+        public DbSet<Company> Companys { set; get; }
+        public DbSet<Complaints> Complaints { set; get; }
+        public DbSet<Customer> Customers { set; get; }
+        public DbSet<Products> Products { set; get; }
+        public DbSet<Employer> Employers { set; get; }
+ 
     }
 }
