@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serwis.Services;
 
 namespace Serwis
 {
@@ -31,10 +32,13 @@ namespace Serwis
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            services.AddSingleton(Configuration);
+            services.AddScoped<IProduct, ProductsService>();
             services.AddDbContext<SerwisContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("SerwisConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

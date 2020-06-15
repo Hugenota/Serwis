@@ -1,0 +1,29 @@
+﻿@model Serwis.Models.Catalog.ProductIndexModel
+
+<div id="products">
+    <h3>Katalog produktów</h3>
+    <div id="ProductTable">
+        <table class="table table-condensed" id="catalogIndexTable">
+            <thread>
+                <tr>
+                    <th>Kategoria</th>
+                    <th>Nazwa</th>
+                    <th>Opis</th>
+                    <th>Stan</th>
+                </tr>
+            </thread>
+            <tbody>
+                @foreach (var product in Model.Products)
+                {
+                <tr class="productRow">
+                    <td class="">product.Category</td>
+                    <td class="">product.Name</td>
+                    <td class="">product.Description</td>
+                    <td class="">product.State</td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -18,7 +18,7 @@ namespace Serwis.Models
         public string ProductDescription { get; set; }
         [Required]
         public string ProductState { get; set; }
-        public string ProductWarranty { get; set; }
+        public DateTime ProductWarranty { get; set; }
 
 
         public virtual Company CompanyID { get; set; }
