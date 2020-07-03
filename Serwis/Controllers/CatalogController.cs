@@ -18,19 +18,16 @@ namespace Serwis.Controllers
         public IActionResult Index()        //map every element of  collection in product models
         {
             var productModel = _product.GetAll();
-
+            
             var listingResult = productModel
                 .Select(result => new ProductListingModel
                 {
                     Id = result.ProductID,
                     Category = result.ProductCategory,
                     Name = result.ProductName,
-                    Description = result.ProductDescription,
                     State = result.ProductState,
-                    Warranty = result.ProductWarranty,
                     Company = _product.GetCurrentComapny(result.ProductID),
-                    Owner = _product.GetCurrentOwner(result.ProductID),
-                    ComplaintsCount = _product.GetComplaintsCount(result.ProductID)
+                    Owner = _product.GetCurrentOwner(result.ProductID)
                 });
 
             var model = new ProductIndexModel()
@@ -38,7 +35,28 @@ namespace Serwis.Controllers
                 Products = listingResult
             };
 
-            return View(); 
+            return View(model); 
+        }
+        public IActionResult Detail (int id)
+        {
+            var product = _product.GetByID(id);
+
+            var model = new ProductDetail
+            {
+                ProdId = product.ProductID,
+                Category = product.ProductCategory,
+                Name = product.ProductName,
+                Description = product.ProductDescription,
+                State = product.ProductState,
+                Warranty = product.ProductWarranty,
+                Company = product.CompanyID.CompanyName,
+                Owner = product.CustomerID.CustomerLogin,
+                Complaints = _product.GetComplaintsCount(id),
+                Picture = product.Image,
+                LastCompalain = _product.LastComplain(id).ComplaintID
+            };
+
+            return View(model);
         }
     }
 }

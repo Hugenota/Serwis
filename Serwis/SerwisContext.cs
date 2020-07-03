@@ -8,8 +8,9 @@ namespace Serwis
     {
         public SerwisContext(DbContextOptions<SerwisContext> options) : base(options)
         {
+           
         }
-
+        
         public DbSet<Company> Companys { set; get; }
         public DbSet<Complaints> Complaints { set; get; }
         public DbSet<Customer> Customers { set; get; }

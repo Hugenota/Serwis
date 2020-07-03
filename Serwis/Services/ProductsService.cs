@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Serwis.Models;
 
+
 namespace Serwis.Services
 {
     public class ProductsService : IProduct
@@ -24,23 +25,17 @@ namespace Serwis.Services
 
         public IEnumerable<Products> GetAll()
         {
-            return _context.Products
-                .Include(Products => Products.ProductCategory)
-                .Include(Products => Products.ProductName)
-                .Include(Products => Products.ProductWarranty);
+            return _context.Products.Include(s => s.Complaints)
+                .Include(s => s.CustomerID)
+                .Include(s => s.CompanyID);
         }
 
         public Products GetByID(int id)
         {
             return _context.Products
-                .Include(Products => Products.ProductCategory)
-                .Include(Products => Products.ProductName)
-                .Include(Products => Products.ProductDescription)
-                .Include(Products => Products.ProductWarranty)
-                .Include(Products => Products.ProductState)
-                .Include(Products => Products.CustomerID)
                 .Include(Products => Products.CustomerID)
                 .Include(Products => Products.Complaints)
+                .Include(Products => Products.CompanyID)
                 .FirstOrDefault(Products => Products.ProductID == id);
         }
 
@@ -82,6 +77,10 @@ namespace Serwis.Services
         public int GetComplaintsCount(int id)
         {
             return _context.Products.Sum(s => s.Complaints.Count());
+        }
+        public Complaints LastComplain(int id)
+        {
+            return GetByID(id).Complaints.Last();
         }
     }
 }

@@ -8,6 +8,8 @@ namespace Serwis.Services
 {
     public interface IProduct
     {
+        Complaints LastComplain(int id);
+
         IEnumerable<Products> GetAll();
         Products GetByID(int id);
         void Add(Products newproduct);

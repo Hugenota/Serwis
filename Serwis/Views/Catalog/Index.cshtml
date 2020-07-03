@@ -6,20 +6,28 @@
         <table class="table table-condensed" id="catalogIndexTable">
             <thread>
                 <tr>
+                    <th>Id Produktu</th>
                     <th>Kategoria</th>
                     <th>Nazwa</th>
-                    <th>Opis</th>
                     <th>Stan</th>
+                    <th>Firma</th>
+                    <th>Właściciel</th>
                 </tr>
             </thread>
             <tbody>
                 @foreach (var product in Model.Products)
                 {
                 <tr class="productRow">
-                    <td class="">product.Category</td>
-                    <td class="">product.Name</td>
-                    <td class="">product.Description</td>
-                    <td class="">product.State</td>
+                    <td class="">
+                        <a asp-controller="Catalog" asp-action="Detail" asp-route-id="@product.Id">
+                            @product.Id
+                        </a>
+                    </td>
+                    <td class="">@product.Category</td>
+                    <td class="">@product.Name</td>
+                    <td class="">@product.State</td>
+                    <td class="">@product.Company.CompanyName</td>
+                    <td class="">@product.Owner.CustomerLogin</td>
                 </tr>
                 }
 

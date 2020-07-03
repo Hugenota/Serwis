@@ -16,6 +16,7 @@ namespace Serwis.Models
 
         public string FixDescription { get; set; }
 
+        public string ComplainState { set; get; }
 
         public virtual Products ProductID { get; set; }
 

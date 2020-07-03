@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Serwis.Models
 {
@@ -19,6 +20,7 @@ namespace Serwis.Models
         [Required]
         public string ProductState { get; set; }
         public DateTime ProductWarranty { get; set; }
+        public string Image { get; set; }
 
 
         public virtual Company CompanyID { get; set; }
